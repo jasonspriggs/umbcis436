@@ -3,6 +3,11 @@ if(isset($_POST['checklcn']) && isset($_POST['checkitem'])){
   require_once('functions.php');
   change_item_state($_POST['checkitem'], $_POST['checklcn']);
 }
+
+if(isset($_POST['signuplcn']) && isset($_POST['signuppin']) && isset($_POST['signupname']) && isset($_POST['signupaddress']) && isset($_POST['signupphone']) && isset($_POST['signupemail'])){
+  require_once('functions.php');
+  create_account($_POST['signuplcn'], $_POST['signuppin'], $_POST['signupname'], $_POST['signupaddress'], $_POST['signupphone'], $_POST['signupemail']);
+}
 ?>
 
 <!doctype html>
@@ -45,18 +50,26 @@ if(isset($_POST['checklcn']) && isset($_POST['checkitem'])){
     <main role="main" class="container">
       <h1 class="mt-5">Admin Functions</h1>
       <div class="row">
-      	<div class="col-md">
-      	  <h3>Checkin/out Media</h3>
-      	  <form action="/admin" method="POST">
-      	    <input name="checklcn" type="text" placeholder="Library Card Number">
-            <input name="checkitem" type="password" placeholder="Item ID">
+        <div class="col-md">
+          <h3>Checkin/out Media</h3>
+          <form action="/admin" method="POST">
+            <input name="checklcn" type="text" placeholder="Library Card Number">
+            <input name="checkitem" type="text" placeholder="Item ID">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Check In/Out</button>
           </form>
-      	</div>
-      	<div class="col-md">
-      	  <h3>Past Due Items</h3>
-      	  
-      	</div>
+        </div>
+        <div class="col-md">
+          <h3>Add User</h3>
+          <form action="/admin" method="POST">
+            <input name="signuplcn" type="text" placeholder="Library Card Number">
+            <input name="signuppin" type="password" placeholder="PIN">
+            <input name="signupname" type="text" placeholder="Name">
+            <input name="signupaddress" type="text" placeholder="Address">
+            <input name="signupphone" type="text" placeholder="Phone Number">
+            <input name="signupemail" type="text" placeholder="Email">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Create Account</button>
+          </form>
+        </div>
       </div>
     </main>
 
