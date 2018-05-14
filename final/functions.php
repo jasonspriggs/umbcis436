@@ -79,6 +79,36 @@ function get_checked_out_items($user) {
 	return $arr;
 }
 
+function search_media_by_title($query) {
+	global $config;
+	$conn = new PDO("mysql:host=" . $config['db']['host'] . ";dbname=" . $config['db']['name'], $config['db']['user'], $config['db']['pass']);
+    	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    	$sth = $conn->prepare('SELECT * FROM media WHERE name LIKE ?');
+	$sth->execute(array($query));
+	$arr = $sth->fetchAll(PDO::FETCH_BOTH);
+	return $arr;
+}
+
+function search_media_by_author($query) {
+	global $config;
+	$conn = new PDO("mysql:host=" . $config['db']['host'] . ";dbname=" . $config['db']['name'], $config['db']['user'], $config['db']['pass']);
+    	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    	$sth = $conn->prepare('SELECT media.* FROM media, authors_media, authors WHERE authors.name LIKE ? AND authors.id = authors_media.author_id AND authors_media.media_id = media.id');
+	$sth->execute(array($query));
+	$arr = $sth->fetchAll(PDO::FETCH_BOTH);
+	return $arr;
+}
+
+function search_media_by_barcode($query) {
+	global $config;
+	$conn = new PDO("mysql:host=" . $config['db']['host'] . ";dbname=" . $config['db']['name'], $config['db']['user'], $config['db']['pass']);
+    	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    	$sth = $conn->prepare('SELECT * FROM media WHERE barcode = ?');
+	$sth->execute(array($query));
+	$arr = $sth->fetchAll(PDO::FETCH_BOTH);
+	return $arr;
+}
+
 //Session Functions
 function randString($length, $charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') {
 	$str = '';

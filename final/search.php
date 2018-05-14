@@ -54,15 +54,39 @@ if(isset($_POST['search_title']) && isset($_POST['search_author']) && isset($_PO
     </header>
 
     <!-- Begin page content -->
+    <?php if(isset($results)) { ?>
+    <main role="main" class="container">
+      <h1 class="mt-5">Search Results</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Authors</th>
+            <th scope="col">ISBN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach($results as $row) { ?>
+          <tr>
+            <td><?php echo $row['name']; ?></td>
+            <td>TBI</td>
+            <td><?php echo $row['barcode']; ?></td>
+          </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </main>
+    <?php } else { ?>
     <main role="main" class="container">
       <h1 class="mt-5">Library Search</h1>
       <form action="/search" method="POST">
-      	<input name="search_title" type="text" placeholder="Title"><br>
-      	<input name="search_author" type="text" placeholder="Author"><br>
-      	<input name="search_barcode" type="text" placeholder="ISBN"><br>
-      	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input name="search_title" type="text" placeholder="Title"><br>
+        <input name="search_author" type="text" placeholder="Author"><br>
+        <input name="search_barcode" type="text" placeholder="ISBN"><br>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
     </main>
+    <?php } ?>
 
     <footer class="footer">
       <div class="container">

@@ -50,9 +50,9 @@
     <main role="main" class="container">
       <h1 class="mt-5">Login to Account</h1>
       <form action="/account" method="POST">
-      	<input name="number" type="text" placeholder="Account Number">
-      	<input name="pin" type="password" placeholder="PIN">
-      	<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+        <input name="number" type="text" placeholder="Account Number">
+        <input name="pin" type="password" placeholder="PIN">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
       </form>
     </main>
     <?php } ?>
